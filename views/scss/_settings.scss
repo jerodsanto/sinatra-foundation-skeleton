@@ -1,4 +1,4 @@
-@import "foundation/modular-scale";
+@import "foundation/common/ratios";
 
 // Settings file containing Foundation defaults
 
@@ -16,6 +16,64 @@
 // $alertColor: #c60f13;
 // $successColor: #5da423;
 // $txtColor: #222;
+// $txtColor: #E6E6E6;
+// $highlightColor: #ffff99;
+// $black: #000;
+// $white: #fff;
+// $shinyEdge: rgba(#fff, .5);
+// $darkEdge: rgba(#000, .2);
+
+// Typography Settings
+
+// $headerFontFamily: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+// $headerFontWeight: bold;
+// $headerFontColor: #222;
+// $bodyFontFamily: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+// $bodyFontWeight: normal;
+
+// Button Settings
+
+// $buttonRadius: 3px;
+// $btnBase: 10px;
+
+// $tinyBtnBase: $btnBase - 5;
+// $smallBtnBase: $btnBase - 3;
+// $largeBtnBase: $btnBase + 5;
+
+// Form Settings
+
+// $formSpacing: 12px;
+
+// Tab Settings
+
+// $tabHeight: 40px;
+
+// Nav Bar Settings
+
+// $navBarHeight: 40px;
+// $navFlyoutBaseWidth: 250px;
+
+// Modular Scale
+// $ratio: $golden;
+// $baseFontSize: 14px;
+// $importantModNum: 44px;
+
+// Tooltip Settings
+// $hasTipBorderBottom: dotted 1px #ccc;
+// $hasTipFontWeight: bold;
+// $hasTipFontColor: #333;
+// $hasTipBorderBottomHover: dotted 1px darken($mainColor, 20%);
+// $hasTipFontColorHover: $mainColor;
+// $tooltipBackgroundColor: #000;
+// $tooltipBackgroundOpacity: 0.85;
+// $tooltipFontSize: 12;
+// $tooltipFontWeight: bold;
+// $tooltipFontColor: #fff;
+// $tapToCloseFontSize: 10;
+// $tapToCloseFontWeight: normal;
+// $tapToCloseFontColor: #888;
+// $tooltipFontSizeScreenSmall: 14;
+// $tooltipBackgroundOpacityScreenSmall: 0.85;
 // $highlightColor: #ffff99;
 // $black: #000;
 // $white: #fff;

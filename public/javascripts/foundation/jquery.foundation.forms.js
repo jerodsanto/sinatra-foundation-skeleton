@@ -7,7 +7,7 @@
 */
 
 (function( $ ){
-  
+
   /**
    * Helper object used to quickly adjust all hidden parent element's, display and visibility properties.
    * This is currently used for the custom drop downs. When the dropdowns are contained within a reveal modal
@@ -21,9 +21,6 @@
    * @function hiddenFix
    */
   var hiddenFix = function() {
-    // We'll use this to temporarily store style properties.
-    var tmp = [],
-        hidden = null; // We'll use this to set hidden parent elements.
 
     return {
       /**
@@ -32,28 +29,35 @@
        * @method adjust
        * @param {jQuery Object} $child
        */
+
+      // We'll use this to temporarily store style properties.
+      tmp : [],
+
+      // We'll use this to set hidden parent elements.
+      hidden : null,
+
       adjust : function( $child ) {
         // Internal reference.
         var _self = this;
-        
+
         // Set all hidden parent elements, including this element.
         _self.hidden = $child.parents().andSelf().filter( ":hidden" );
-        
+
         // Loop through all hidden elements.
         _self.hidden.each( function() {
-          
+
           // Cache the element.
           var $elem = $( this );
-          
+
           // Store the style attribute.
           // Undefined if element doesn't have a style attribute.
           _self.tmp.push( $elem.attr( 'style' ) );
-          
+
           // Set the element's display property to block,
           // but ensure it's visibility is hidden.
           $elem.css( { 'visibility' : 'hidden', 'display' : 'block' } );
         });
-      
+
       }, // end adjust
 
       /**
@@ -92,7 +96,7 @@
 
   jQuery.foundation = jQuery.foundation || {};
   jQuery.foundation.customForms = jQuery.foundation.customForms || {};
-  
+
   $.foundation.customForms.appendCustomMarkup = function ( options ) {
 
     var defaults = {
@@ -194,7 +198,7 @@
         //
         // Build our <li> elements.
         //
-        liHtml = $.map( $options, function( opt ) { return "<li>" + opt.value + "</li>"; } ).join( '' );
+        liHtml = $options.map( function() { return "<li>" + $( this ).html() + "</li>"; } ).get().join( '' );
         //
         // Append our <li> elements to the custom list (<ul>).
         //
@@ -203,7 +207,7 @@
         // Insert the the currently selected list item before all other elements.
         // Then, find the element and assign it to $currentSelect.
         //
-        
+
         $currentSelect = $customSelect.prepend( '<a href="#" class="current">' + $selectedOption.html() + '</a>' ).find( ".current" );
         //
         // Add the custom select element after the <select> element.
@@ -218,7 +222,7 @@
         //
         // Create our list item <li> elements.
         //
-        liHtml = $.map( $options, function( opt ) { return "<li>" + opt.value + "</li>"; } ).join( '' );
+        liHtml = $options.map( function() { return "<li>" + $( this ).html() + "</li>"; } ).get().join( '' );
         //
         // Refresh the ul with options from the select in case the supplied markup doesn't match.
         // Clear what's currently in the <ul> element.
@@ -254,9 +258,9 @@
           // Update the current element with the option value.
           //
           if ($currentSelect) {
-            $currentSelect.html( this.value );
+            $currentSelect.html( $( this ).html() );
           }
-          
+
         }
 
       });
@@ -362,11 +366,9 @@
     var $input = $element.prev(),
         input = $input[0];
 
-    if (false == $input.is(':disabled')) {
+    if (false === $input.is(':disabled')) {
         input.checked = ((input.checked) ? false : true);
         $element.toggleClass('checked');
-
-        $input.trigger('change');
     }
   };
 
@@ -374,7 +376,7 @@
     var $input = $element.prev(),
         input = $input[0];
 
-    if (false == $input.is(':disabled')) {
+    if (false === $input.is(':disabled')) {
       $('input:radio[name="' + $input.attr('name') + '"]').each(function () {
         $(this).next().removeClass('checked');
       });
@@ -385,25 +387,25 @@
     }
   };
 
-  $('form.custom span.custom.checkbox').on('click', function (event) {
+  $(document).on('click', 'form.custom span.custom.checkbox', function (event) {
     event.preventDefault();
     event.stopPropagation();
 
     toggleCheckbox($(this));
   });
 
-  $('form.custom span.custom.radio').on('click', function (event) {
+  $(document).on('click', 'form.custom span.custom.radio', function (event) {
     event.preventDefault();
     event.stopPropagation();
 
     toggleRadio($(this));
   });
 
-  $('form.custom select').on('change', function (event) {
+  $(document).on('change', 'form.custom select[data-customforms!=disabled]', function (event) {
     refreshCustomSelect($(this));
   });
 
-  $('form.custom label').on('click', function (event) {
+  $(document).on('click', 'form.custom label', function (event) {
     var $associatedElement = $('#' + $(this).attr('for')),
         $customCheckbox,
         $customRadio;
@@ -420,7 +422,7 @@
     }
   });
 
-  $('form.custom div.custom.dropdown a.current, form.custom div.custom.dropdown a.selector').live('click', function (event) {
+  $(document).on('click', 'form.custom div.custom.dropdown a.current, form.custom div.custom.dropdown a.selector', function (event) {
     var $this = $(this),
         $dropdown = $this.closest('div.custom.dropdown'),
         $select = $dropdown.prev();
@@ -428,7 +430,7 @@
     event.preventDefault();
     $('div.dropdown').removeClass('open');
 
-    if (false == $select.is(':disabled')) {
+    if (false === $select.is(':disabled')) {
         $dropdown.toggleClass('open');
 
         if ($dropdown.hasClass('open')) {
@@ -443,7 +445,7 @@
     }
   });
 
-  $('form.custom div.custom.dropdown li').live('click', function (event) {
+  $(document).on('click', 'form.custom div.custom.dropdown li', function (event) {
     var $this = $(this),
         $customDropdown = $this.closest('div.custom.dropdown'),
         $select = $customDropdown.prev(),
@@ -473,9 +475,9 @@
     $select[0].selectedIndex = selectedIndex;
 
     $select.trigger('change');
-  });  
-  
-  
+  });
+
+
   $.fn.foundationCustomForms = $.foundation.customForms.appendCustomMarkup;
 
 })( jQuery );

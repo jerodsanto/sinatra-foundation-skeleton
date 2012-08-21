@@ -7,7 +7,7 @@
 */
 
 
-(function($) {
+(function ($) {
   'use strict';
   $.fn.findFirstImage = function () {
     return this.first()
@@ -246,7 +246,8 @@
       this.$rotator.css({
         "-webkit-transform": degreeCSS,
         "-moz-transform": degreeCSS,
-        "-o-transform": degreeCSS
+        "-o-transform": degreeCSS,
+        "-ms-transform": degreeCSS
       });
       if(this.degrees > 180) {
         this.$rotator.addClass('move');
